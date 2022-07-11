@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="text-center alert alert-info">Login Page</h4>
+        <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username..." class="form-control">
+        <input type="password" name="password" placeholder="Password..." class="form-control" >
+
+        <input type="submit" class="btn btn-success" value="LOGIN"><br>
+        <a href="{% url 'register' %}" class="btn btn-info">Back to Registration</a>
+
+        {% for message in messages %}
+            <p class="btn btn-alert">{{message}}</p>
+        {% endfor %}
+        </form>
+    </div>
+<div>
+{% endblock %}

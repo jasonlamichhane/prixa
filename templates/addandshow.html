@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="text-center alert alert-info">Add Servers</h4>
+        <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-success" value="ADD">
+        </form>
+    </div>
+
+    <div class="col-sm-8">
+        <h4 class="text-center alert alert-info">Show Server Details</h4>
+        {% if show %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Server Name</th>
+                      <th scope="col">Server Type</th>
+                      <th scope="col">Disk Type</th>
+                      <th scope="col">owner</th>
+                      <th scope="col">Server Location</th>
+                      <th scope="col">CPU</th>
+                      <th scope="col">RAM</th>
+                      <th scope="col">IPaddress</th>
+                      <th scope="col">Username</th>
+                      <th scope="col">Password</th>
+                      <th scope="col">PublicIP</th>
+                      <th scope="col">PrivateIP</th>
+                      <th scope="col">Remarks</th>
+                      <th scope="col">Status</th>'
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                        {% for sh in show %}
+                    <tr>
+                        <th scope="row">{{sh.id}}</th>
+                        <td>{{sh.servername}}</td>
+                        <td>{{sh.servertype}}</td>
+                        <td>{{sh.disktype}}</td>
+                        <td>{{sh.owner}}</td>
+                        <td>{{sh.serverlocation}}</td>
+                        <td>{{sh.cpu}}</td>
+                        <td>{{sh.ram}}</td>
+                        <td>{{sh.ipaddress}}</td>
+                        <td>{{sh.username}}</td>
+                        <td>{{sh.password}}</td>
+                        <td>{{sh.publicip}}</td>
+                        <td>{{sh.privateip}}</td>
+                        <td>{{sh.remarks}}</td>
+                        <td>{{sh.status}}</td>
+                        <td>
+                            <a href="{% url 'updatedata' sh.id %}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{% url 'deletedata' sh.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                        {% endfor %}
+                  </tbody>
+            </table>
+        {% else %}
+            <h4 class="text-center alert alert-warning">No Records </h4>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

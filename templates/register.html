@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-8">
+        <h4 class="text-center alert alert-info">Registration Page</h4>
+        <form action="" method="POST">
+        {% csrf_token %}
+        {% for fm in form %}
+            {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+        {% endfor %}
+
+
+        <!-- {{ form.username.label }}
+        {{ form.username }}
+
+        {{ form.email.label }}
+        {{ form.email }}
+
+        {{ form.password1.label }}
+        {{ form.password1 }}
+
+        {{ form.password2.label }}
+        {{ form.password2 }} -->
+
+        <input type="submit" class="btn btn-success" value="ADD"><br>
+        <a href="{% url 'login' %}" class="btn btn-info">LogIn if you already have an acccount</a>
+        </form>
+    </div>
+<div>
+{% endblock %}
+
+<!-- <h3>registration page</h3>
+
+<form action="" method="post">
+    
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <input type="submit" name="Create User">
+</form> -->
